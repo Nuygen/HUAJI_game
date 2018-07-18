@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
  * Small behaviour to handle menu button callbacks.
@@ -10,7 +11,7 @@ public class MenuController : MonoBehaviour
    */
   public void OnStartClicked()
   {
-    Application.LoadLevel("Game");
+        SceneManager.LoadScene("Game");
   }
 
   /*
@@ -18,6 +19,6 @@ public class MenuController : MonoBehaviour
    */
   public void OnBackClicked()
   {
-    Application.LoadLevel("Menu");
+        SceneManager.LoadScene("Menu");
   }
 }

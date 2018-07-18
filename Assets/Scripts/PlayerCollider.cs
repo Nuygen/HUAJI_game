@@ -13,8 +13,7 @@ public class PlayerCollider : MonoBehaviour
   private void OnTriggerEnter2D(Collider2D other)
   {
     // Obtain a reference to the Player's PlayerController
-    PlayerController playerController =
-      other.gameObject.GetComponent<PlayerController>();
+    PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
 
     // Register damage with player
     playerController.Damage();
