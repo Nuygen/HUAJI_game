@@ -14,9 +14,9 @@ public class PlayerCollider : MonoBehaviour
   {
     // Obtain a reference to the Player's PlayerController
     PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
-
-    // Register damage with player
-    playerController.Damage();
+        // Register damage with player
+        //碰撞到的物体是带着不同的标签的.
+    playerController.Damage(gameObject.tag);
 
     // Make this object disappear
     GameObject.Destroy(gameObject);

@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
  */
 public class PlayerController : MonoBehaviour
 {
+    public GameObject shotPosition;
+    public GameObject shotPrefabs;
     private Rigidbody2D rigidbody2d;
     private int health;
     private int canJump;
@@ -26,9 +28,25 @@ public class PlayerController : MonoBehaviour
     * Remove one health unit from player and if health becomes 0, change
     * scene to the end game scene.
     */
-    public void Damage()
+    public void Damage(string tag)
     {
-        health -= 1;
+        if (tag == "bomb")
+        {
+            health -= 2;
+        }
+        else if (tag == "bottle")
+        {
+            health -= 1;
+        }
+        else if (tag == "half_life")
+        {
+            health += 1;
+        }
+        else if (tag == "whole_life")
+        {
+            health += 2;
+        }
+
 
         if(health < 1)
         {
@@ -76,6 +94,11 @@ public class PlayerController : MonoBehaviour
         {
             if(transform.localScale.x > 0.3)
                 transform.localScale -= new Vector3(0.1f, 0.1f, 0);
+        }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            Instantiate(shotPrefabs, shotPosition.transform.position, Quaternion.identity);
         }
     }
 
