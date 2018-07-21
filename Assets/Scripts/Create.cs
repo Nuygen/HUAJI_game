@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Create : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class Create : MonoBehaviour {
     private float[] probility_add_minus = new float[4] {0.03f, 0.03f, -0.02f,-0.01f };//每增加游戏难度之后的增加或者减少的概率
     private float score_time = 0; //初始的计时器得分
     private float i = 1f;         //游戏难度水平计数
+    public Text timeText;
 
     private IEnumerator coroutine;
 
@@ -21,12 +23,14 @@ public class Create : MonoBehaviour {
 	void Start () {
         coroutine = BornObjects(gamehard, timegap);
         StartCoroutine(coroutine);
+        timeText.text = "Level : 1" + ", 游戏时长 ：0.00s";
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //每个几秒就会增加物体出现的时间间隔.时间间隔最低是0.1秒.
         score_time += Time.deltaTime;
+        timeText.text = "Level : " + i.ToString("0") + ", 游戏时长 ： " + score_time.ToString("0.00");
         if (score_time > step_level * i && timegap >= timegaplimit)
         {
             ++i;
