@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject shotPrefabs;
     private Rigidbody2D rigidbody2d;
-    private int health;
+    private float health;
     private int canJump;
 
    /*
@@ -31,23 +31,23 @@ public class PlayerController : MonoBehaviour
     {
         if (tag == "bomb")
         {
-            health -= 2;
+            health -= 1;
         }
         else if (tag == "bottle")
         {
-            health -= 1;
+            health -= 0.5f;
         }
         else if (tag == "half_life")
         {
-            health += 1;
+            health += 0.5f;
         }
         else if (tag == "whole_life")
         {
-            health += 2;
+            health += 1;
         }
 
 
-        if(health < 1)
+        if(health <= 0)
         {
                 SceneManager.LoadScene("EndGame");
         }
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     /*
     * Accessor for health variable, used by he HUD to display health.
     */
-    public int GetHealth()
+    public float GetHealth()
     {
         return health;
     }
