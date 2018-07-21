@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
  */
 public class PlayerController : MonoBehaviour
 {
-    public GameObject shotPosition;
     public GameObject shotPrefabs;
     private Rigidbody2D rigidbody2d;
     private int health;
@@ -82,7 +81,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         //滑稽表情的旋转
-        transform.Rotate(new Vector3(0, 0, 360 * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, -360 * Time.deltaTime));
 
         if(Input.GetKey(KeyCode.Space))
         {
@@ -98,7 +97,9 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F))
         {
-            Instantiate(shotPrefabs, shotPosition.transform.position, Quaternion.identity);
+            Vector2 shot = gameObject.transform.position;
+            shot.x = shot.x +  gameObject.transform.localScale.x + 1;
+            Instantiate(shotPrefabs, shot, Quaternion.identity);
         }
     }
 
