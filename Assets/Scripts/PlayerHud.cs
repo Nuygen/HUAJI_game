@@ -18,7 +18,7 @@ public class PlayerHud : MonoBehaviour
     private void Start()
     {
         playerController = GetComponent<PlayerController>();
-        heart = Resources.Load<Texture2D>("heart");
+        //heart = Resources.Load<Texture2D>("whole-life");
        // halfHeart = Resources.Load<Texture2D>("halfHeart");
     }
 
