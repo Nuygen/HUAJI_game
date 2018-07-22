@@ -9,13 +9,13 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject shotPrefabs;
     private Rigidbody2D rigidbody2d;
-    private int health;
+    private float health;
     private int canJump;
 
-   /*
-   * Apply initial health and also store the Rigidbody2D reference for
-   * future because GetComponent<T> is relatively expensive.
-   */
+    /*
+    * Apply initial health and also store the Rigidbody2D reference for
+    * future because GetComponent<T> is relatively expensive.
+    */
     private void Start()
     {
         health = 6;
@@ -31,32 +31,32 @@ public class PlayerController : MonoBehaviour
     {
         if (tag == "bomb")
         {
-            health -= 2;
+            health -= 1;
         }
         else if (tag == "bottle")
         {
-            health -= 1;
+            health -= 0.5f;
         }
         else if (tag == "half_life")
         {
-            health += 1;
+            health += 0.5f;
         }
         else if (tag == "whole_life")
         {
-            health += 2;
+            health += 1;
         }
 
 
-        if(health < 1)
+        if (health <= 0)
         {
-                SceneManager.LoadScene("EndGame");
+            SceneManager.LoadScene("EndGame");
         }
     }
 
     /*
     * Accessor for health variable, used by he HUD to display health.
     */
-    public int GetHealth()
+    public float GetHealth()
     {
         return health;
     }
@@ -69,9 +69,9 @@ public class PlayerController : MonoBehaviour
     */
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if(canJump > 0)
+            if (canJump > 0)
             {
                 //rigidbody2d.velocity.Set(0, 0);是不行的.
                 //增加的跳跃的效果更加符合我们玩家的理解正常的二段跳跃
@@ -83,22 +83,22 @@ public class PlayerController : MonoBehaviour
         //滑稽表情的旋转
         transform.Rotate(new Vector3(0, 0, -360 * Time.deltaTime));
 
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             //调整scale大小
-            if(transform.localScale.x < 3)
+            if (transform.localScale.x < 3)
                 transform.localScale += new Vector3(0.1f, 0.1f, 0);
         }
         if (Input.GetKey(KeyCode.V))
         {
-            if(transform.localScale.x > 0.3)
+            if (transform.localScale.x > 0.3)
                 transform.localScale -= new Vector3(0.1f, 0.1f, 0);
         }
 
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             Vector2 shot = gameObject.transform.position;
-            shot.x = shot.x +  gameObject.transform.localScale.x + 1;
+            shot.x = shot.x + gameObject.transform.localScale.x + 1;
             Instantiate(shotPrefabs, shot, Quaternion.identity);
         }
     }
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
     */
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if( other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground")
         {
             canJump = 2;
         }
